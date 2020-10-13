@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-export default class DisplayComponent extends Component {
-    showDisplay = () => {
+export default class ScreenComponent extends Component {
+    showScreen = () => {
         let state = this.props.state;
         if (state.firstNumber) {
             return (
@@ -16,6 +16,6 @@ export default class DisplayComponent extends Component {
         }
     }
     render() {
-        return this.showDisplay();
+        return this.showScreen();
     }
 }
