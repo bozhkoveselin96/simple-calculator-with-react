@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import DisplayComponent from "./DisplayComponent";
 import ButtonComponent from "./ButtonComponent";
 
+const errorMessage = 'Cannot be divided by zero!';
+
 export default class Container extends Component {
     constructor() {
         super();
         this.state = {
-            result       : 0,
-            firstNumber  : '',
-            secondNumber : '',
-            operation    : '',
-            getResult    : false
+            firstNumber     : '',
+            secondNumber    : '',
+            operation       : '',
+            result          : '',
+            selectedEqualTo : false
         };
     }
 
@@ -28,27 +30,61 @@ export default class Container extends Component {
             case '9':
                 switch (this.state.operation) {
                     case '':
-                        this.setState({ firstNumber : value });
+                        if (this.state.firstNumber === errorMessage) {
+                            this.clearState(value);
+                        } else {
+                            let previousFirstNum = this.state.firstNumber;
+                            this.setState({ firstNumber : `${ previousFirstNum }${ value }`});
+                        }
                         break;
                     default:
-                        this.setState({ secondNumber : value });
+                        let previousSecondNum = this.state.secondNumber;
+                        this.setState({ secondNumber : `${ previousSecondNum }${ value }` });
                 }
-                console.log(this.state)
                 break;
             case '+':
             case '-':
-            case 'x':
+            case '*':
             case '/':
+                if (this.state.firstNumber === '') {
+                    this.setState({ firstNumber : '0' });
+                }
+                if (this.state.firstNumber === errorMessage) {
+                    this.clearState('0');
+                }
                 this.setState({ operation : value });
-                console.log(this.state)
+
                 break;
             case '=':
-                let result = this.state.result;
-                result = eval(`${ this.state.firstNumber } ${ this.state.operation } ${ this.state.secondNumber }`);
-                this.setState({ result : result });
-                console.log(this.state)
+                this.setState({ selectedEqualTo : true });
+                let result          = this.state.result;
+                let firstNumber     = this.state.firstNumber;
+                let secondNumber    = this.state.secondNumber;
+                let operation       = this.state.operation;
+                if (firstNumber !== '0' && operation === '/' && secondNumber === '0') {
+                    result = errorMessage;
+                } else {
+                    result = eval(`${ firstNumber } ${ operation } ${ secondNumber }`);
+                }
+                this.clearState(result);
+                break;
+            case 'CLEAR':
+                this.clearState('');
                 break;
         }
+    }
+
+    clearState = result => {
+        let firstNumber = '';
+        if (result !== '') {
+            firstNumber = result;
+        }
+        this.setState({
+            firstNumber     : firstNumber,
+            secondNumber    : '',
+            operation       : '',
+            result          : ''
+        });
     }
 
     renderButtonsSection(buttonValues) {
@@ -65,15 +101,10 @@ export default class Container extends Component {
     render() {
         return (
             <div>
-                <DisplayComponent
-                    result={ this.state.result }
-                    firstNumber={ this.state.firstNumber }
-                    operation={ this.state.operation }
-                    secondNumber={ this.state.secondNumber }
-                />
+                <DisplayComponent state={ this.state } />
                 { this.renderButtonsSection(['0', '=', '+', 'CLEAR']) }
                 { this.renderButtonsSection(['7', '8', '9', '-']) }
-                { this.renderButtonsSection(['4', '5', '6', 'x']) }
+                { this.renderButtonsSection(['4', '5', '6', '*']) }
                 { this.renderButtonsSection(['1', '2', '3', '/']) }
             </div>
         );
