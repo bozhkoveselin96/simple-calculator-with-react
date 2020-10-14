@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.btn-0,.btn-1,.btn-2,.btn-3,.btn-4,
+.btn-5,.btn-6,.btn-7,.btn-8,.btn-9 {
+  width: 75px;
+  border: 1px solid !important;
+  margin: 1px !important;
+}
+
+.btn-sign {
+  color: lightgrey !important;
+  width: 75px;
+  background-color: darkred !important;
+  margin: 1px !important;
+  border: 1px solid black !important;
+}
