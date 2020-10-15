@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ScreenComponent from "./ScreenComponent";
 import ButtonComponent from "./ButtonComponent";
 
-
 const errorMessage = 'Cannot be divided by zero!';
 
 export default class Container extends Component {
@@ -113,7 +112,7 @@ export default class Container extends Component {
 
     render() {
         return (
-            <div>
+            <div className="calculator">
                 <ScreenComponent state={ this.state } />
                 { this.renderButtonsSection(['0', '=', '+', 'CLEAR']) }
                 { this.renderButtonsSection(['7', '8', '9', '-']) }
