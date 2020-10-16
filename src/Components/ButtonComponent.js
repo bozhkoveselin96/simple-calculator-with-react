@@ -9,7 +9,10 @@ export default class ButtonComponent extends Component {
 
     render() {
         return (
-            <Button className={`btn-${ parseInt(this.props.value) > -1 ? this.props.value : 'sign' }`} variant="contained" onClick={ this.handleClick }>
+            <Button className={`btn-${ parseInt(this.props.value) > -1 ? this.props.value : 'sign' }`}
+                    variant="contained"
+                    onClick={ this.handleClick }
+            >
                 { this.props.value }
             </Button>
         );

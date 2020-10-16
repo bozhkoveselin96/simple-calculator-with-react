@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -56,7 +51,34 @@
   width: 308px;
   border: 2px solid black;
   border-radius: 10px;
-  margin: 50px auto auto;
+  margin: auto;
   padding: 15px 5px 5px;
+  background-color: darkolivegreen;
+}
+
+.result-field {
+  width: 100%;
+  height: 50px !important;
+  border: 1px solid black !important;
+  background: lightgrey;
+  margin-bottom: 10px;
+}
+
+.MuiChip-label {
+  width: 100%;
+  text-align: end;
+  font-size: xx-large;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  background-image: url("numbers-background.png");
+  background-color: #282c34;
+}
+
+.empty-header {
+  width: 100%;
+  height: 75px;
 }
 
