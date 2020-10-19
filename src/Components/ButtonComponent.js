@@ -8,12 +8,21 @@ export default class ButtonComponent extends Component {
     }
 
     render() {
+        let multiplication = '×';
+        let division = '÷';
+        let newSign;
+        if (this.props.value === '/') {
+            newSign = division;
+        } else if (this.props.value === '*') {
+            newSign = multiplication;
+        }
+
         return (
             <Button className={`btn-${ parseInt(this.props.value) > -1 ? this.props.value : 'sign' }`}
                     variant="contained"
                     onClick={ this.handleClick }
             >
-                { this.props.value }
+                { (this.props.value === '/' || this.props.value === '*' ? newSign : this.props.value) }
             </Button>
         );
     }
